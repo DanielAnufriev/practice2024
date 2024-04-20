@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MainModule</a> &gt; <a href="index.source.html" class="el_package">DanielAnufrievGit</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package DanielAnufrievGit;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
+
+/*Реализовать алгоритм растровой компьютерной графики: выделение контуров изображения методом Собеля*/
+/* Дополнение проекта: добавлен метод размытия (Blur) изображения по методу Гаусса*/
+<span class="nc" id="L13">public class Main {</span>
+
+
+    public static File FileChoice(String imagesPath) {
+
+<span class="nc bnc" id="L18" title="All 6 branches missed.">        File[] files = new File(imagesPath).listFiles((dir, name) -&gt; name.toLowerCase().endsWith(&quot;.jpg&quot;) || name.toLowerCase().endsWith(&quot;.png&quot;) || name.toLowerCase().endsWith(&quot;.jpeg&quot;));</span>
+
+        // Display the list of files in the directory
+<span class="nc" id="L21">        System.out.println(&quot;Available files in the directory:&quot;);</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (int i = 0; i &lt; files.length; i++) {</span>
+<span class="nc" id="L23">            System.out.println((i + 1) + &quot;. &quot; + files[i].getName());</span>
+        }
+
+        // Choose the file to process
+<span class="nc" id="L27">        Scanner in = new Scanner(System.in);</span>
+<span class="nc" id="L28">        System.out.println(&quot;Input the nomber of image&quot;);</span>
+<span class="nc" id="L29">        int choice = in.nextInt(); // Change this to the desired file number</span>
+<span class="nc" id="L30">        File ImageFile = files[choice - 1];</span>
+<span class="nc" id="L31">        return ImageFile;</span>
+    }
+
+    public static File MakeSobel(File sourceImageFile, File destinationDirectory) {
+<span class="nc" id="L35">        ImageProcessor processor = new ImageProcessor();</span>
+        try {
+
+<span class="nc" id="L38">            File resultSobel_file = processor.performSobel(sourceImageFile, destinationDirectory);</span>
+<span class="nc" id="L39">            System.out.println(&quot;The selection of the contours of the image by the Sobel method is completed&quot;);</span>
+<span class="nc" id="L40">            return resultSobel_file;</span>
+<span class="nc" id="L41">        } catch (IOException e) {</span>
+<span class="nc" id="L42">            e.printStackTrace();</span>
+<span class="nc" id="L43">            return null;</span>
+        }
+    }
+
+    public static File MakeGaussianBlur(File sourceImageFile, File destinationDirectory) {
+
+<span class="nc" id="L49">        GaussianBlur gaussianBlur = new GaussianBlur();</span>
+        try {
+<span class="nc" id="L51">            File resultgaussianBlur = gaussianBlur.applyGaussianBlur(sourceImageFile, destinationDirectory);</span>
+<span class="nc" id="L52">            System.out.println(&quot;Image blurring by the Gauss method is completed.&quot;);</span>
+<span class="nc" id="L53">            return  resultgaussianBlur;</span>
+<span class="nc" id="L54">        } catch (IOException e) {</span>
+<span class="nc" id="L55">            e.printStackTrace();</span>
+<span class="nc" id="L56">            return null;</span>
+        }
+
+
+    }
+
+    public static File CreateDirectory(){
+<span class="nc" id="L63">        File destinationDirectory = new File(System.getProperty(&quot;user.home&quot;) + &quot;/Pictures&quot; + &quot;/Results&quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (!destinationDirectory.exists()) {</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if (destinationDirectory.mkdir()) {</span>
+<span class="nc" id="L66">                System.out.println(&quot;The 'Results' folder was created in the directory.&quot;);</span>
+            } else {
+<span class="nc" id="L68">                System.out.println(&quot;The 'Results' folder created.&quot;);</span>
+            }
+        }
+<span class="nc" id="L71">        return destinationDirectory;</span>
+    }
+
+    public static void ChooseAction(File sourceImageFile, File destinationDirectory){
+<span class="nc" id="L75">        Logger logger = Logger.getLogger(Main.class);</span>
+<span class="nc" id="L76">        BasicConfigurator.configure();</span>
+<span class="nc" id="L77">        Scanner inAction = new Scanner(System.in);</span>
+<span class="nc" id="L78">        System.out.println(&quot;Input 1 - to apply the Sobel boundary selection method &quot; + &quot;\n&quot; +</span>
+                &quot;Input 2 - to apply the Gaussian Blur method&quot;);
+<span class="nc" id="L80">        int ActionChoice = inAction.nextInt(); // Change this to the desired file number</span>
+<span class="nc bnc" id="L81" title="All 3 branches missed.">        switch (ActionChoice) {</span>
+            case (1):
+<span class="nc bnc" id="L83" title="All 2 branches missed.">                if (MakeSobel(sourceImageFile, destinationDirectory) != null) {</span>
+<span class="nc" id="L84">                    logger.info(&quot;Successful image processing&quot;);</span>
+                } else {
+<span class="nc" id="L86">                    logger.info(&quot;Unsuccessful image processing&quot;);</span>
+                }
+
+<span class="nc" id="L89">                break;</span>
+            case (2):
+
+<span class="nc bnc" id="L92" title="All 2 branches missed.">                if (MakeGaussianBlur(sourceImageFile, destinationDirectory) != null) {</span>
+<span class="nc" id="L93">                    logger.info(&quot;Successful image processing&quot;);</span>
+                } else {
+<span class="nc" id="L95">                    logger.info(&quot;Unsuccessful image processing&quot;);</span>
+                }
+                break;
+        }
+<span class="nc" id="L99">    }</span>
+
+
+
+    public static void main(String[] args) {
+
+<span class="nc" id="L105">        String imagesPath = System.getProperty(&quot;user.home&quot;) + &quot;/Pictures&quot;;</span>
+<span class="nc" id="L106">        File sourceImageFile = FileChoice(imagesPath);</span>
+<span class="nc" id="L107">        File destinationDirectory = CreateDirectory();</span>
+<span class="nc" id="L108">        ChooseAction(sourceImageFile,destinationDirectory);</span>
+
+
+
+<span class="nc" id="L112">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

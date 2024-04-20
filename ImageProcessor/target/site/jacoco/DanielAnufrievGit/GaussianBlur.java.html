@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GaussianBlur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ImageProcessor</a> &gt; <a href="index.source.html" class="el_package">DanielAnufrievGit</a> &gt; <span class="el_source">GaussianBlur.java</span></div><h1>GaussianBlur.java</h1><pre class="source lang-java linenums">package DanielAnufrievGit;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+<span class="nc" id="L7">public class GaussianBlur {</span>
+    private BufferedImage sourceImage;
+    public File applyGaussianBlur(File sourceImageFile, File destinationDirectory) throws IOException {
+
+        try {
+<span class="nc" id="L12">            this.sourceImage = ImageIO.read(sourceImageFile);</span>
+<span class="nc" id="L13">        } catch (IOException e) {</span>
+<span class="nc" id="L14">            e.printStackTrace();</span>
+<span class="nc" id="L15">        }</span>
+
+<span class="nc" id="L17">        int width = sourceImage.getWidth();</span>
+<span class="nc" id="L18">        int height = sourceImage.getHeight();</span>
+<span class="nc" id="L19">        int[] pixels = sourceImage.getRGB(0, 0, width, height, null, 0, width);</span>
+
+<span class="nc" id="L21">        int[][] matrix = {</span>
+                {1, 2, 1},
+                {2, 4, 2},
+                {1, 2, 1}
+        };
+
+<span class="nc" id="L27">        int sum = 16; // Сумма всех элементов матрицы</span>
+
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        for (int i = 1; i &lt; height - 1; i++) {</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">            for (int j = 1; j &lt; width - 1; j++) {</span>
+<span class="nc" id="L31">                int red = 0;</span>
+<span class="nc" id="L32">                int green = 0;</span>
+<span class="nc" id="L33">                int blue = 0;</span>
+
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                for (int k = -1; k &lt;= 1; k++) {</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                    for (int l = -1; l &lt;= 1; l++) {</span>
+<span class="nc" id="L37">                        int rgb = pixels[(i + k) * width + j + l];</span>
+<span class="nc" id="L38">                        red += (rgb &gt;&gt; 16) &amp; 0xFF;</span>
+<span class="nc" id="L39">                        green += (rgb &gt;&gt; 8) &amp; 0xFF;</span>
+<span class="nc" id="L40">                        blue += (rgb &amp; 0xFF);</span>
+                    }
+                }
+
+<span class="nc" id="L44">                red = red / sum;</span>
+<span class="nc" id="L45">                green = green / sum;</span>
+<span class="nc" id="L46">                blue = blue / sum;</span>
+
+<span class="nc" id="L48">                pixels[i * width + j] = (red &lt;&lt; 16) | (green &lt;&lt; 8) | blue;</span>
+            }
+        }
+
+<span class="nc" id="L52">        sourceImage.setRGB(0, 0, width, height, pixels, 0, width);</span>
+
+        try {
+<span class="nc" id="L55">            File outputFile = new File(destinationDirectory, &quot;Blur_&quot; + sourceImageFile.getName());</span>
+<span class="nc" id="L56">            ImageIO.write(this.sourceImage, &quot;png&quot;, outputFile);</span>
+<span class="nc" id="L57">            return outputFile;</span>
+<span class="nc" id="L58">        } catch (IOException e) {</span>
+<span class="nc" id="L59">            e.printStackTrace();</span>
+<span class="nc" id="L60">            return null;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ImageProcessor {
+
     private final Mask mask;
 
 
@@ -13,7 +14,7 @@ public class ImageProcessor {
         this.mask = new Mask();
     }
 
-    public void performSobel(File sourceImageFile, File destinationDirectory) throws IOException {
+    public File performSobel(File sourceImageFile, File destinationDirectory) throws IOException {
         BufferedImage sourceImage = ImageIO.read(sourceImageFile);
         BufferedImage resultImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), BufferedImage.TYPE_INT_RGB);
         Pixels pixelColor = new Pixels(sourceImage);
@@ -27,7 +28,7 @@ public class ImageProcessor {
 
         File outputFile = new File(destinationDirectory, "bordered_" + sourceImageFile.getName());
         ImageIO.write(resultImage, "png", outputFile);
-
+        return outputFile;
     }
 
     private int calculateSobelValue(int x, int y, Pixels pixelColor) {
