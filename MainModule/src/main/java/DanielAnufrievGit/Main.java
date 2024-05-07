@@ -38,7 +38,8 @@ public class Main {
             File resultSobel_file = processor.performSobel(sourceImageFile, destinationDirectory);
             System.out.println("The selection of the contours of the image by the Sobel method is completed");
             return resultSobel_file;
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -59,7 +60,7 @@ public class Main {
 
     }
 
-    public static File CreateDirectory(){
+    public static File CreateDirectory() {
         File destinationDirectory = new File(System.getProperty("user.home") + "/Pictures" + "/Results");
         if (!destinationDirectory.exists()) {
             if (destinationDirectory.mkdir()) {
@@ -71,7 +72,7 @@ public class Main {
         return destinationDirectory;
     }
 
-    public static void ChooseAction(File sourceImageFile, File destinationDirectory){
+    public static void ChooseAction(File sourceImageFile, File destinationDirectory) {
         Logger logger = Logger.getLogger(Main.class);
         BasicConfigurator.configure();
         Scanner inAction = new Scanner(System.in);
@@ -82,7 +83,8 @@ public class Main {
             case (1):
                 if (MakeSobel(sourceImageFile, destinationDirectory) != null) {
                     logger.info("Successful image processing");
-                } else {
+                }
+                else {
                     logger.info("Unsuccessful image processing");
                 }
 

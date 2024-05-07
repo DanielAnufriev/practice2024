@@ -46,7 +46,7 @@ public class ImageProcessor {
         }
 
         int magnitude = Math.abs(sumX) + Math.abs(sumY);
-        return magnitude;
+        return magnitude ;
     }
 }
 
