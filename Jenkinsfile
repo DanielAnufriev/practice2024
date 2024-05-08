@@ -39,7 +39,7 @@ pipeline {
         }
         stage("Publish") {
             steps {
-                bat 'copy "target\\practice2024-1.0-SNAPSHOT-jar-with-dependencies.jar" "C:\\practice2024-1.0.jar"'
+                bat 'copy "practice2024\\target\\practice2024-1.0-SNAPSHOT-jar-with-dependencies.jar" "C:\\practice2024-1.0.jar"'
             }
         }
     }
