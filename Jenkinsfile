@@ -37,7 +37,7 @@ pipeline {
                 bat 'mvn install'
             }
         }
-        stage("Publish") {
+        stage("Copy jar") {
             steps {
                 bat 'copy "target\\practice2024-1.0-SNAPSHOT-jar-with-dependencies.jar" "C:\\artefactTest\\practice2024-1.0.jar"'
             }
