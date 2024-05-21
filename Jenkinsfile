@@ -2,12 +2,12 @@ pipeline {
     agent any
     
     stages {
-        stage("Compile code") {
+        stage("Compilation") {
             steps {
                 bat 'mvn clean compile'
             }
         }
-        stage("Tests") {
+        stage("Tests run") {
             when {
                 branch 'feature/*'
             }
@@ -15,7 +15,7 @@ pipeline {
                 bat 'mvn test'
             }
         }
-        stage("Static analyse") {
+        stage("Chechstyle analys") {
             when {
                 branch 'develop'
             }
@@ -23,7 +23,7 @@ pipeline {
                 bat 'mvn checkstyle:check'
             }
         }
-        stage("Report") {
+        stage("Test report") {
             when {
                 branch 'feature/*'
             }
@@ -32,14 +32,14 @@ pipeline {
                 jacoco()
             }
         }
-        stage("Install") {
+        stage("Install jar") {
             steps {
                 bat 'mvn install'
             }
         }
         stage("Copy jar") {
             steps {
-                bat 'copy "target\\practice2024-1.0-SNAPSHOT-jar-with-dependencies.jar" "C:\\artefactTest\\practice2024-1.0.jar"'
+                bat 'copy "MainModule\\target\\practice2024-1.0-SNAPSHOT-jar-with-dependencies.jar" "C:\\artefactTest\\practice2024-1.0.jar"'
             }
         }
     }
