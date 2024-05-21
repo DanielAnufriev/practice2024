@@ -10,34 +10,34 @@ import org.apache.log4j.Logger;
 
 /*Реализовать алгоритм растровой компьютерной графики: выделение контуров изображения методом Собеля*/
 /* Дополнение проекта: добавлен метод размытия (Blur) изображения по методу Гаусса*/
-<span class="nc" id="L13">public class Main {</span>
+<span class="fc" id="L13">public class Main {</span>
 
 
     public static File FileChoice(String imagesPath) {
 
-<span class="nc bnc" id="L18" title="All 6 branches missed.">        File[] files = new File(imagesPath).listFiles((dir, name) -&gt; name.toLowerCase().endsWith(&quot;.jpg&quot;) || name.toLowerCase().endsWith(&quot;.png&quot;) || name.toLowerCase().endsWith(&quot;.jpeg&quot;));</span>
+<span class="pc bpc" id="L18" title="5 of 6 branches missed.">        File[] files = new File(imagesPath).listFiles((dir, name) -&gt; name.toLowerCase().endsWith(&quot;.jpg&quot;) || name.toLowerCase().endsWith(&quot;.png&quot;) || name.toLowerCase().endsWith(&quot;.jpeg&quot;));</span>
 
         // Display the list of files in the directory
-<span class="nc" id="L21">        System.out.println(&quot;Available files in the directory:&quot;);</span>
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (int i = 0; i &lt; files.length; i++) {</span>
-<span class="nc" id="L23">            System.out.println((i + 1) + &quot;. &quot; + files[i].getName());</span>
+<span class="fc" id="L21">        System.out.println(&quot;Available files in the directory:&quot;);</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (int i = 0; i &lt; files.length; i++) {</span>
+<span class="fc" id="L23">            System.out.println((i + 1) + &quot;. &quot; + files[i].getName());</span>
         }
 
         // Choose the file to process
-<span class="nc" id="L27">        Scanner in = new Scanner(System.in);</span>
-<span class="nc" id="L28">        System.out.println(&quot;Input the nomber of image&quot;);</span>
-<span class="nc" id="L29">        int choice = in.nextInt(); // Change this to the desired file number</span>
-<span class="nc" id="L30">        File ImageFile = files[choice - 1];</span>
-<span class="nc" id="L31">        return ImageFile;</span>
+<span class="fc" id="L27">        Scanner in = new Scanner(System.in);</span>
+<span class="fc" id="L28">        System.out.println(&quot;Input the nomber of image&quot;);</span>
+<span class="fc" id="L29">        int choice = in.nextInt(); // Change this to the desired file number</span>
+<span class="fc" id="L30">        File ImageFile = files[choice - 1];</span>
+<span class="fc" id="L31">        return ImageFile;</span>
     }
 
     public static File MakeSobel(File sourceImageFile, File destinationDirectory) {
-<span class="nc" id="L35">        ImageProcessor processor = new ImageProcessor();</span>
+<span class="fc" id="L35">        ImageProcessor processor = new ImageProcessor();</span>
         try {
 
-<span class="nc" id="L38">            File resultSobel_file = processor.performSobel(sourceImageFile, destinationDirectory);</span>
-<span class="nc" id="L39">            System.out.println(&quot;The selection of the contours of the image by the Sobel method is completed&quot;);</span>
-<span class="nc" id="L40">            return resultSobel_file;</span>
+<span class="fc" id="L38">            File resultSobel_file = processor.performSobel(sourceImageFile, destinationDirectory);</span>
+<span class="fc" id="L39">            System.out.println(&quot;The selection of the contours of the image by the Sobel method is completed&quot;);</span>
+<span class="fc" id="L40">            return resultSobel_file;</span>
         }
 <span class="nc" id="L42">        catch (IOException e) {</span>
 <span class="nc" id="L43">            e.printStackTrace();</span>
@@ -47,11 +47,11 @@ import org.apache.log4j.Logger;
 
     public static File MakeGaussianBlur(File sourceImageFile, File destinationDirectory) {
 
-<span class="nc" id="L50">        GaussianBlur gaussianBlur = new GaussianBlur();</span>
+<span class="fc" id="L50">        GaussianBlur gaussianBlur = new GaussianBlur();</span>
         try {
-<span class="nc" id="L52">            File resultgaussianBlur = gaussianBlur.applyGaussianBlur(sourceImageFile, destinationDirectory);</span>
-<span class="nc" id="L53">            System.out.println(&quot;Image blurring by the Gauss method is completed.&quot;);</span>
-<span class="nc" id="L54">            return  resultgaussianBlur;</span>
+<span class="fc" id="L52">            File resultgaussianBlur = gaussianBlur.applyGaussianBlur(sourceImageFile, destinationDirectory);</span>
+<span class="fc" id="L53">            System.out.println(&quot;Image blurring by the Gauss method is completed.&quot;);</span>
+<span class="fc" id="L54">            return  resultgaussianBlur;</span>
 <span class="nc" id="L55">        } catch (IOException e) {</span>
 <span class="nc" id="L56">            e.printStackTrace();</span>
 <span class="nc" id="L57">            return null;</span>
@@ -61,28 +61,28 @@ import org.apache.log4j.Logger;
     }
 
     public static File CreateDirectory() {
-<span class="nc" id="L64">        File destinationDirectory = new File(System.getProperty(&quot;user.home&quot;) + &quot;/Pictures&quot; + &quot;/Results&quot;);</span>
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (!destinationDirectory.exists()) {</span>
+<span class="fc" id="L64">        File destinationDirectory = new File(System.getProperty(&quot;user.home&quot;) + &quot;/Pictures&quot; + &quot;/Results&quot;);</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (!destinationDirectory.exists()) {</span>
 <span class="nc bnc" id="L66" title="All 2 branches missed.">            if (destinationDirectory.mkdir()) {</span>
 <span class="nc" id="L67">                System.out.println(&quot;The 'Results' folder was created in the directory.&quot;);</span>
             } else {
 <span class="nc" id="L69">                System.out.println(&quot;The 'Results' folder created.&quot;);</span>
             }
         }
-<span class="nc" id="L72">        return destinationDirectory;</span>
+<span class="fc" id="L72">        return destinationDirectory;</span>
     }
 
     public static void ChooseAction(File sourceImageFile, File destinationDirectory) {
-<span class="nc" id="L76">        Logger logger = Logger.getLogger(Main.class);</span>
-<span class="nc" id="L77">        BasicConfigurator.configure();</span>
-<span class="nc" id="L78">        Scanner inAction = new Scanner(System.in);</span>
-<span class="nc" id="L79">        System.out.println(&quot;Input 1 - to apply the Sobel boundary selection method &quot; + &quot;\n&quot; +</span>
+<span class="fc" id="L76">        Logger logger = Logger.getLogger(Main.class);</span>
+<span class="fc" id="L77">        BasicConfigurator.configure();</span>
+<span class="fc" id="L78">        Scanner inAction = new Scanner(System.in);</span>
+<span class="fc" id="L79">        System.out.println(&quot;Input 1 - to apply the Sobel boundary selection method &quot; + &quot;\n&quot; +</span>
                 &quot;Input 2 - to apply the Gaussian Blur method&quot;);
-<span class="nc" id="L81">        int ActionChoice = inAction.nextInt(); // Change this to the desired file number</span>
-<span class="nc bnc" id="L82" title="All 3 branches missed.">        switch (ActionChoice) {</span>
+<span class="fc" id="L81">        int ActionChoice = inAction.nextInt(); // Change this to the desired file number</span>
+<span class="pc bpc" id="L82" title="1 of 3 branches missed.">        switch (ActionChoice) {</span>
             case (1):
-<span class="nc bnc" id="L84" title="All 2 branches missed.">                if (MakeSobel(sourceImageFile, destinationDirectory) != null) {</span>
-<span class="nc" id="L85">                    logger.info(&quot;Successful image processing&quot;);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">                if (MakeSobel(sourceImageFile, destinationDirectory) != null) {</span>
+<span class="fc" id="L85">                    logger.info(&quot;Successful image processing&quot;);</span>
                 }
                 else {
 <span class="nc" id="L88">                    logger.info(&quot;Unsuccessful image processing&quot;);</span>
@@ -91,26 +91,35 @@ import org.apache.log4j.Logger;
 <span class="nc" id="L91">                break;</span>
             case (2):
 
-<span class="nc bnc" id="L94" title="All 2 branches missed.">                if (MakeGaussianBlur(sourceImageFile, destinationDirectory) != null) {</span>
-<span class="nc" id="L95">                    logger.info(&quot;Successful image processing&quot;);</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">                if (MakeGaussianBlur(sourceImageFile, destinationDirectory) != null) {</span>
+<span class="fc" id="L95">                    logger.info(&quot;Successful image processing&quot;);</span>
                 } else {
 <span class="nc" id="L97">                    logger.info(&quot;Unsuccessful image processing&quot;);</span>
                 }
                 break;
         }
-<span class="nc" id="L101">    }</span>
+<span class="fc" id="L101">    }</span>
 
-
+    public static void Test1() {
+<span class="nc" id="L104">        System.out.println(&quot;1&quot;);</span>
+<span class="nc" id="L105">        System.out.println(&quot;2&quot;);</span>
+<span class="nc" id="L106">        System.out.println(&quot;3&quot;);</span>
+<span class="nc" id="L107">        System.out.println(&quot;4&quot;);</span>
+<span class="nc" id="L108">        System.out.println(&quot;5&quot;);</span>
+<span class="nc" id="L109">        System.out.println(&quot;6&quot;);</span>
+<span class="nc" id="L110">        System.out.println(&quot;7&quot;);</span>
+<span class="nc" id="L111">    }</span>
 
     public static void main(String[] args) {
 
-<span class="nc" id="L107">        String imagesPath = System.getProperty(&quot;user.home&quot;) + &quot;/Pictures&quot;;</span>
-<span class="nc" id="L108">        File sourceImageFile = FileChoice(imagesPath);</span>
-<span class="nc" id="L109">        File destinationDirectory = CreateDirectory();</span>
-<span class="nc" id="L110">        ChooseAction(sourceImageFile,destinationDirectory);</span>
+<span class="nc" id="L115">        String imagesPath = System.getProperty(&quot;user.home&quot;) + &quot;/Pictures&quot;;</span>
+<span class="nc" id="L116">        File sourceImageFile = FileChoice(imagesPath);</span>
+<span class="nc" id="L117">        File destinationDirectory = CreateDirectory();</span>
+<span class="nc" id="L118">        ChooseAction(sourceImageFile,destinationDirectory);</span>
+<span class="nc" id="L119">        Test1();</span>
 
 
 
-<span class="nc" id="L114">    }</span>
+<span class="nc" id="L123">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

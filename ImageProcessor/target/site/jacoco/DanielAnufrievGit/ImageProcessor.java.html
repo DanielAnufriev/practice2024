@@ -10,43 +10,43 @@ public class ImageProcessor {
     private final Mask mask;
 
 
-<span class="nc" id="L13">    public ImageProcessor() {</span>
-<span class="nc" id="L14">        this.mask = new Mask();</span>
-<span class="nc" id="L15">    }</span>
+<span class="fc" id="L13">    public ImageProcessor() {</span>
+<span class="fc" id="L14">        this.mask = new Mask();</span>
+<span class="fc" id="L15">    }</span>
 
     public File performSobel(File sourceImageFile, File destinationDirectory) throws IOException {
-<span class="nc" id="L18">        BufferedImage sourceImage = ImageIO.read(sourceImageFile);</span>
-<span class="nc" id="L19">        BufferedImage resultImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), BufferedImage.TYPE_INT_RGB);</span>
-<span class="nc" id="L20">        Pixels pixelColor = new Pixels(sourceImage);</span>
+<span class="fc" id="L18">        BufferedImage sourceImage = ImageIO.read(sourceImageFile);</span>
+<span class="fc" id="L19">        BufferedImage resultImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), BufferedImage.TYPE_INT_RGB);</span>
+<span class="fc" id="L20">        Pixels pixelColor = new Pixels(sourceImage);</span>
 
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (int i = 1; i &lt; sourceImage.getWidth() - 1; i++) {</span>
-<span class="nc bnc" id="L23" title="All 2 branches missed.">            for (int j = 1; j &lt; sourceImage.getHeight() - 1; j++) {</span>
-<span class="nc" id="L24">                int pixelValue = calculateSobelValue(i, j, pixelColor);</span>
-<span class="nc" id="L25">                resultImage.setRGB(i, j, pixelValue);</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (int i = 1; i &lt; sourceImage.getWidth() - 1; i++) {</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">            for (int j = 1; j &lt; sourceImage.getHeight() - 1; j++) {</span>
+<span class="fc" id="L24">                int pixelValue = calculateSobelValue(i, j, pixelColor);</span>
+<span class="fc" id="L25">                resultImage.setRGB(i, j, pixelValue);</span>
             }
         }
 
-<span class="nc" id="L29">        File outputFile = new File(destinationDirectory, &quot;bordered_&quot; + sourceImageFile.getName());</span>
-<span class="nc" id="L30">        ImageIO.write(resultImage, &quot;png&quot;, outputFile);</span>
-<span class="nc" id="L31">        return outputFile;</span>
+<span class="fc" id="L29">        File outputFile = new File(destinationDirectory, &quot;bordered_&quot; + sourceImageFile.getName());</span>
+<span class="fc" id="L30">        ImageIO.write(resultImage, &quot;png&quot;, outputFile);</span>
+<span class="fc" id="L31">        return outputFile;</span>
     }
 
     private int calculateSobelValue(int x, int y, Pixels pixelColor) {
-<span class="nc" id="L35">        int[][] gx = mask.gx;</span>
-<span class="nc" id="L36">        int[][] gy = mask.gy;</span>
+<span class="fc" id="L35">        int[][] gx = mask.gx;</span>
+<span class="fc" id="L36">        int[][] gy = mask.gy;</span>
 
-<span class="nc" id="L38">        int sumX = 0;</span>
-<span class="nc" id="L39">        int sumY = 0;</span>
+<span class="fc" id="L38">        int sumX = 0;</span>
+<span class="fc" id="L39">        int sumY = 0;</span>
 
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        for (int i = -1; i &lt;= 1; i++) {</span>
-<span class="nc bnc" id="L42" title="All 2 branches missed.">            for (int j = -1; j &lt;= 1; j++) {</span>
-<span class="nc" id="L43">                sumX += (pixelColor.pixR[x + i][y + j] * gx[i + 1][j + 1]);</span>
-<span class="nc" id="L44">                sumY += (pixelColor.pixR[x + i][y + j] * gy[i + 1][j + 1]);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        for (int i = -1; i &lt;= 1; i++) {</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            for (int j = -1; j &lt;= 1; j++) {</span>
+<span class="fc" id="L43">                sumX += (pixelColor.pixR[x + i][y + j] * gx[i + 1][j + 1]);</span>
+<span class="fc" id="L44">                sumY += (pixelColor.pixR[x + i][y + j] * gy[i + 1][j + 1]);</span>
             }
         }
 
-<span class="nc" id="L48">        int magnitude = Math.abs(sumX) + Math.abs(sumY);</span>
-<span class="nc" id="L49">        return magnitude ;</span>
+<span class="fc" id="L48">        int magnitude = Math.abs(sumX) + Math.abs(sumY);</span>
+<span class="fc" id="L49">        return magnitude ;</span>
     }
 }
 
