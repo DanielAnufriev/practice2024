@@ -112,6 +112,8 @@ public class Main {
         File sourceImageFile = FileChoice(imagesPath);
         File destinationDirectory = CreateDirectory();
         ChooseAction(sourceImageFile,destinationDirectory);
-        
+
+
+
     }
 }
