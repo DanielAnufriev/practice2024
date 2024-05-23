@@ -78,7 +78,13 @@ public class Main {
         Scanner inAction = new Scanner(System.in);
         System.out.println("Input 1 - to apply the Sobel boundary selection method " + "\n" +
                 "Input 2 - to apply the Gaussian Blur method");
-        int ActionChoice = inAction.nextInt(); // Change this to the desired file number
+        int ActionChoice;
+        if (inAction.hasNextInt()) {
+            ActionChoice = inAction.nextInt(); // Change this to the desired file number
+        }
+        else {
+            ActionChoice = 1;
+        }
         switch (ActionChoice) {
             case (1):
                 if (MakeSobel(sourceImageFile, destinationDirectory) != null) {
