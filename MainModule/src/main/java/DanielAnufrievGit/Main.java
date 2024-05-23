@@ -59,7 +59,7 @@ public class Main {
 
     }
 
-    public static File CreateDirectory(){
+    public static File CreateDirectory() {
         File destinationDirectory = new File(System.getProperty("user.home") + "/Pictures" + "/Results");
         if (!destinationDirectory.exists()) {
             if (destinationDirectory.mkdir()) {
@@ -71,7 +71,7 @@ public class Main {
         return destinationDirectory;
     }
 
-    public static void ChooseAction(File sourceImageFile, File destinationDirectory){
+    public static void ChooseAction(File sourceImageFile, File destinationDirectory) {
         Logger logger = Logger.getLogger(Main.class);
         BasicConfigurator.configure();
         Scanner inAction = new Scanner(System.in);
