@@ -39,7 +39,7 @@ pipeline {
         }
         stage("Copy jar") {
             steps {
-                bat 'copy "MainModule\\target\\practice2024-1.0-SNAPSHOT-jar-with-dependencies.jar" "C:\\artefactTest\\practice2024-1.0.jar"'
+                bat 'copy "MainModule\\target\\MainModule-1.0-SNAPSHOT-jar-with-dependencies.jar" "C:\\artefactTest\\practice2024-1.0.jar"'
             }
         }
     }
