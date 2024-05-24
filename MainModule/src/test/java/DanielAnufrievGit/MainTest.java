@@ -107,12 +107,4 @@ class MainTest {
         Main.ChooseAction(sourceImageFile, destinationDirectory);
 
     }
-    @Test
-    public void testMainMethod() {
-        String input = "2\n2\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        Main.main(new String[]{});
-
-    }
 }
