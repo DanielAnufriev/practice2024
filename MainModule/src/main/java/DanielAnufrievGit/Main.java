@@ -104,21 +104,12 @@ public class Main {
         }
     }
 
-    public static void testvoid() {
-        System.out.println("1");
-        System.out.println("2");
-        System.out.println("3");
-        System.out.println("4");
-        System.out.println("5");
-    }
-
     public static void main(String[] args) {
 
         String imagesPath = System.getProperty("user.home") + "/Pictures";
         File sourceImageFile = FileChoice(imagesPath);
         File destinationDirectory = CreateDirectory();
         ChooseAction(sourceImageFile,destinationDirectory);
-        testvoid();
 
 
 
