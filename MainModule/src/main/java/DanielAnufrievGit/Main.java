@@ -103,7 +103,14 @@ public class Main {
                 break;
         }
     }
-
+    public static void testvoidif() {
+        System.out.println("1");
+        System.out.println("2");
+        System.out.println("3");
+        System.out.println("4");
+        System.out.println("5");
+        System.out.println("6");
+    }
 
 
     public static void main(String[] args) {
@@ -112,7 +119,7 @@ public class Main {
         File sourceImageFile = FileChoice(imagesPath);
         File destinationDirectory = CreateDirectory();
         ChooseAction(sourceImageFile,destinationDirectory);
-
+        testvoidif();
 
 
     }
